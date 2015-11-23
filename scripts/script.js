@@ -33,11 +33,18 @@ function draw() {
 		ctxTwo.moveTo(305,250);
 		ctxTwo.lineTo(280,275);
 		ctxTwo.lineTo(280,225);
-		ctxTwo.fill();
+		ctx.closePath();
+		ctxTwo.stroke();
 	}
 
 	if (canvas.getContext) {
 		var ctx = canvas.getContext("2d");
+
+/*to draw arcs and cirlces, we use the arc() and arcTo() methods:
+
+arc(x,y,radius,startAngle,endAngle,anticlockwiseBool)
+
+arcTo(x1,y1,x2,y2,radius)*/
 
 		ctx.beginPath();
 		ctx.arc(75,350,50,0,Math.PI*2,true);
@@ -56,3 +63,27 @@ function draw() {
 
 }
 
+function drawTwo(){
+	var canvasTwo = document.getElementById("canvasTwo");
+	if (canvasTwo.getContext){
+		var ctx = canvasTwo.getContext("2d");
+
+		for(var i=0;i<13;i++){
+			for (var j=0;j<10;j++){
+				ctx.beginPath();
+				var x = 15+j*50;
+				var y = -5+i*50;
+				var radius = 20;
+				var startAngle = 0;
+				var endAngle = Math.PI+(Math.PI*j)/2;
+				var anticlockwise = i%2==0 ? false : true;
+				ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise);
+				if (i==1||i==3||i==5||i>7){
+					ctx.fill();
+				} else {
+					ctx.stroke();
+				}
+			}	
+		}
+	}
+}
